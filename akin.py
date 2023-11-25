@@ -65,12 +65,12 @@ class PhraseBasedSMT:
     def word_alignment(self):
         # Use GIZA++ for word alignment
         # (Example command, adjust paths and parameters as needed)
-        subprocess.call("/mnt/c/smt/pbsmt/tools/GIZA++ -S /mnt/c/smt/pbsmt/source_corpus.vcb -T /mnt/c/smt/pbsmt/target_corpus.vcb -o /mnt/c/smt/pbsmt/output -outputpath /mnt/c/smt/pbsmt/", shell=True)
+        subprocess.call("/mnt/c/smt/pbsmt/tools/plain2snt.out corpus_fil.txt corpus_eng.txt", shell=True)
 
-        subprocess.call("")
+        subprocess.call("/mnt/c/smt/pbsmt/tools/snt2cooc.out corpus_fil.vcb corpus_eng.vcb corpus_fil_corpus_eng.snt > cooc.cooc", shell=True)
 
+        subprocess.call("/mnt/c/smt/pbsmt/giza-pp/GIZA++-v2/GIZA++ -S corpus_fil.vcb -T corpus_eng.vcb -C corpus_fil_corpus_eng.snt -CoocurrenceFile cooc.cooc -output alignment -outputpath /mnt/c/smt/pbsmt/myout", shell=True)
 
-        
 
         # Read the original alignment file
         with open('/mnt/c/smt/pbsmt/output', 'r') as f:
